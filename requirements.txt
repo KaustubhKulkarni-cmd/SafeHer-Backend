@@ -1,0 +1,7 @@
+Flask
+flask-cors
+firebase-admin
+python-dotenv
+pandas
+numpy
+scikit-learn

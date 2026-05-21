@@ -1,0 +1,53 @@
+from flask import Flask
+from flask_cors import CORS
+
+from routes.emergency_api import emergency_bp
+from routes.auth_api import auth_bp
+from routes.route_api import route_bp
+from config.firebase_config import *
+from dotenv import load_dotenv
+import os
+from routes.ai_api import ai_bp
+from routes import route_api
+
+load_dotenv()  # This loads the variables from your .env file
+
+def create_app():
+
+    app = Flask(__name__)
+
+    CORS(app)
+
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(route_bp, url_prefix="/api")
+    app.register_blueprint(emergency_bp, url_prefix="/api/agent/emergency")
+    app.register_blueprint(ai_bp, url_prefix="/api")
+
+    return app
+# def create_app():
+#     app = Flask(__name__)
+#     CORS(app)
+
+#     app.register_blueprint(auth_bp, url_prefix="/api/auth")
+
+#     @app.route("/")
+#     def home():
+#         return {"message": "SafeHer Backend Running"}
+
+#     return app
+
+# from flask import Blueprint, jsonify
+
+# auth_bp = Blueprint("auth", __name__)
+
+# @auth_bp.route("/test", methods=["GET"])
+# def test_auth():
+#     return jsonify({
+#         "message": "Auth API working",
+#         "status": "success"
+#     })
+if __name__ == "__main__":
+
+    app = create_app()
+
+    app.run(debug=True, port=5000)
