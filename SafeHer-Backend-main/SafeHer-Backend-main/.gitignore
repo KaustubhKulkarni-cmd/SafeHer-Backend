@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+safeher/
+venv/
+env/
+
+# Firebase key
+serviceAccountKey.json
+service_account.json
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
