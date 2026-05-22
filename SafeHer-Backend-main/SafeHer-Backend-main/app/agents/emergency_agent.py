@@ -31,12 +31,26 @@ def alert_contacts(state: EmergencyState):
     except Exception as e:
         print(f"Error fetching user name from Firestore: {e}")
 
-    contacts = [
-        "+919699447120",
-        "+919373351445",
-        "+917058541200",
-        "+919021436064",
-    ]
+    user_id = state.get("user_id")
+    contacts = []
+    if user_id:
+        try:
+            guardians_ref = db.collection("users").document(user_id).collection("guardians").stream()
+            for g in guardians_ref:
+                g_data = g.to_dict()
+                phone = g_data.get("phone")
+                if phone:
+                    contacts.append(phone)
+        except Exception as e:
+            print(f"Error fetching dynamic contacts from Firestore: {e}")
+
+    if not contacts:
+        contacts = [
+            "+919699447120",
+            "+919373351445",
+            "+917058541200",
+            "+919021436064",
+        ]
 
     for contact in contacts:
         send_sos_sms(contact, state["lat"], state["lon"], user_name=user_name)

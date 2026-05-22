@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import os
 from routes.ai_api import ai_bp
 from routes import route_api
+from routes.guardians_api import guardians_bp
 
 load_dotenv()  # This loads the variables from your .env file
 
@@ -24,6 +25,7 @@ def create_app():
     app.register_blueprint(emergency_bp, url_prefix="/api/agent/emergency")
     app.register_blueprint(ai_bp, url_prefix="/api")
     app.register_blueprint(monitoring_bp, url_prefix="/api/monitoring")
+    app.register_blueprint(guardians_bp, url_prefix="/api/guardians")
 
     return app
 # def create_app():
