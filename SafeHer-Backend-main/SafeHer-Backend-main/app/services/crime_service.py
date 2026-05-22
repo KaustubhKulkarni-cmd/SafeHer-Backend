@@ -30,6 +30,7 @@ AREA_COORDINATES = {
     "Kharadi": {"lat": 18.5513, "lng": 73.9348, "file": "kharadi_crime_analysis_summary1.xlsx"},
     "Wagholi": {"lat": 18.5793, "lng": 73.9689, "file": "wagholi_crime_analysis_summary1.xlsx"}
 }
+}
 
 class CrimeService:
 
