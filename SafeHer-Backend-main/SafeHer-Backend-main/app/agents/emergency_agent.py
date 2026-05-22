@@ -20,13 +20,26 @@ def alert_contacts(state: EmergencyState):
 
     print("Sending SMS to trusted contacts...")
 
+    user_name = "A SafeHer User"
+    try:
+        user_id = state.get("user_id")
+        if user_id:
+            user_ref = db.collection("users").document(user_id).get()
+            if user_ref.exists:
+                user_data = user_ref.to_dict()
+                user_name = user_data.get("name", "A SafeHer User")
+    except Exception as e:
+        print(f"Error fetching user name from Firestore: {e}")
+
     contacts = [
         "+919699447120",
-        "+919373351445"
+        "+919373351445",
+        "+917058541200",
+        "+919021436064",
     ]
 
     for contact in contacts:
-        send_sos_sms(contact, state["lat"], state["lon"])
+        send_sos_sms(contact, state["lat"], state["lon"], user_name=user_name)
 
     state["contacts_alerted"] = True
     return state

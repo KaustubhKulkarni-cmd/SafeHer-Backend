@@ -4,6 +4,7 @@ from flask_cors import CORS
 from routes.emergency_api import emergency_bp
 from routes.auth_api import auth_bp
 from routes.route_api import route_bp
+from routes.monitoring_api import monitoring_bp
 from config.firebase_config import *
 from dotenv import load_dotenv
 import os
@@ -22,6 +23,7 @@ def create_app():
     app.register_blueprint(route_bp, url_prefix="/api")
     app.register_blueprint(emergency_bp, url_prefix="/api/agent/emergency")
     app.register_blueprint(ai_bp, url_prefix="/api")
+    app.register_blueprint(monitoring_bp, url_prefix="/api/monitoring")
 
     return app
 # def create_app():
