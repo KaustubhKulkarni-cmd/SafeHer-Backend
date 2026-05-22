@@ -84,7 +84,7 @@ class CrimeService:
     def find_database_dir():
         """Walks up parent directories to find where the Excel files are located."""
         current_dir = os.path.abspath(os.path.dirname(__file__))
-        for _ in range(5):
+        for _ in range(7):
             if os.path.exists(os.path.join(current_dir, "Alankar.xlsx")):
                 return current_dir
             current_dir = os.path.dirname(current_dir)
