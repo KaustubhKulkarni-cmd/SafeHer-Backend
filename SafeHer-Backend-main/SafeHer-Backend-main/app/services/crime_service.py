@@ -5,30 +5,31 @@ import pandas as pd
 
 # ─── Coordinates mapping for 24 Pune Areas ────────────────────────────────────
 AREA_COORDINATES = {
-    "Alankar": {"lat": 18.5083, "lng": 73.8186, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\NandedCity_crime_analysis_summary1.xlsx"},
-    "Ambegaon": {"lat": 18.4552, "lng": 73.8340, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Ambegaon_crime_analysis_summary1.xlsx"},
-    "Bharti Vidyapeeth": {"lat": 18.4575, "lng": 73.8502, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\BHARTI_VIDYAPEETH_crime_analysis_summary1.xlsx"},
-    "Baner": {"lat": 18.5590, "lng": 73.7797, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Baner_crime_analysis_summary1.xlsx"},
-    "Bibvewadi": {"lat": 18.4695, "lng": 73.8643, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Bibvewadi_crime_analysis_summary1.xlsx"},
-    "Chandannagar": {"lat": 18.5626, "lng": 73.9315, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\CHANDANNAGAR POLICE STATION_crime_analysis.xlsx"},
-    "Deccan": {"lat": 18.5168, "lng": 73.8441, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Deccan.xlsx"},
-    "Faraskhana": {"lat": 18.5181, "lng": 73.8562, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\FARASKHANAcrime_analysis_summary - Copy.xlsx"},
-    "Fursungi": {"lat": 18.4800, "lng": 73.9700, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Fursungi_crime_analysis_summary1.xlsx"},
-    "Koregaon Park": {"lat": 18.5362, "lng": 73.8930, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\KOREGAON PARKcrime_analysis_summary.xlsx"},
-    "Kothrud": {"lat": 18.5074, "lng": 73.8077, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\KOTHURUD_crime_analysis.xlsx"},
-    "Kalepadal": {"lat": 18.4900, "lng": 73.9280, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Kalepadal_crime_analysis_summary1.xlsx"},
-    "Kondhwa": {"lat": 18.4784, "lng": 73.8911, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Kondhwa_crime_analysis_summary1.xlsx"},
-    "Marketyard": {"lat": 18.4880, "lng": 73.8680, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Marketyard_crime_analysis_summary1.xlsx"},
-    "Nanded City": {"lat": 18.4638, "lng": 73.7915, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\NandedCity_crime_analysis_summary1.xlsx"},
-    "Sahakar Nagar": {"lat": 18.4897, "lng": 73.8519, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\SAHAKAR NAGARcrime_analysis_summary.xlsx"},
-    "Samarth": {"lat": 18.5200, "lng": 73.8700, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\SAMARTHcrime_analysis_summary.xlsx"},
-    "Swargate": {"lat": 18.5018, "lng": 73.8629, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\SWARGATEcrime_analysis_summary.xlsx"},
-    "Shivaji Nagar": {"lat": 18.5314, "lng": 73.8446, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\ShivajiNagar_crime_analysis_summary1.xlsx"},
-    "Uttamnagar": {"lat": 18.4800, "lng": 73.7700, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\Uttamnagar_crime_analysis_summary1.xlsx"},
-    "Vishrantwadi": {"lat": 18.5683, "lng": 73.8741, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\VISHRANTWADIcrime_analysis_summary.xlsx"},
-    "Wanvadi": {"lat": 18.5022, "lng": 73.8983, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\WANVADI_crime_analysis.xlsx"},
-    "Kharadi": {"lat": 18.5513, "lng": 73.9348, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\kharadi_crime_analysis_summary1.xlsx"},
-    "Wagholi": {"lat": 18.5793, "lng": 73.9689, "file": r"C:\Users\parth\OneDrive\Desktop\EDI_SEM4\wagholi_crime_analysis_summary1.xlsx"}
+    "Alankar": {"lat": 18.5083, "lng": 73.8186, "file": "NandedCity_crime_analysis_summary1.xlsx"},
+    "Ambegaon": {"lat": 18.4552, "lng": 73.8340, "file": "Ambegaon_crime_analysis_summary1.xlsx"},
+    "Bharti Vidyapeeth": {"lat": 18.4575, "lng": 73.8502, "file": "BHARTI_VIDYAPEETH_crime_analysis_summary1.xlsx"},
+    "Baner": {"lat": 18.5590, "lng": 73.7797, "file": "Baner_crime_analysis_summary1.xlsx"},
+    "Bibvewadi": {"lat": 18.4695, "lng": 73.8643, "file": "Bibvewadi_crime_analysis_summary1.xlsx"},
+    "Chandannagar": {"lat": 18.5626, "lng": 73.9315, "file": "CHANDANNAGAR POLICE STATION_crime_analysis.xlsx"},
+    "Deccan": {"lat": 18.5168, "lng": 73.8441, "file": "Deccan.xlsx"},
+    "Faraskhana": {"lat": 18.5181, "lng": 73.8562, "file": "FARASKHANAcrime_analysis_summary - Copy.xlsx"},
+    "Fursungi": {"lat": 18.4800, "lng": 73.9700, "file": "Fursungi_crime_analysis_summary1.xlsx"},
+    "Koregaon Park": {"lat": 18.5362, "lng": 73.8930, "file": "KOREGAON PARKcrime_analysis_summary.xlsx"},
+    "Kothrud": {"lat": 18.5074, "lng": 73.8077, "file": "KOTHURUD_crime_analysis.xlsx"},
+    "Kalepadal": {"lat": 18.4900, "lng": 73.9280, "file": "Kalepadal_crime_analysis_summary1.xlsx"},
+    "Kondhwa": {"lat": 18.4784, "lng": 73.8911, "file": "Kondhwa_crime_analysis_summary1.xlsx"},
+    "Marketyard": {"lat": 18.4880, "lng": 73.8680, "file": "Marketyard_crime_analysis_summary1.xlsx"},
+    "Nanded City": {"lat": 18.4638, "lng": 73.7915, "file": "NandedCity_crime_analysis_summary1.xlsx"},
+    "Sahakar Nagar": {"lat": 18.4897, "lng": 73.8519, "file": "SAHAKAR NAGARcrime_analysis_summary.xlsx"},
+    "Samarth": {"lat": 18.5200, "lng": 73.8700, "file": "SAMARTHcrime_analysis_summary.xlsx"},
+    "Swargate": {"lat": 18.5018, "lng": 73.8629, "file": "SWARGATEcrime_analysis_summary.xlsx"},
+    "Shivaji Nagar": {"lat": 18.5314, "lng": 73.8446, "file": "ShivajiNagar_crime_analysis_summary1.xlsx"},
+    "Uttamnagar": {"lat": 18.4800, "lng": 73.7700, "file": "Uttamnagar_crime_analysis_summary1.xlsx"},
+    "Vishrantwadi": {"lat": 18.5683, "lng": 73.8741, "file": "VISHRANTWADIcrime_analysis_summary.xlsx"},
+    "Wanvadi": {"lat": 18.5022, "lng": 73.8983, "file": "WANVADI_crime_analysis.xlsx"},
+    "Kharadi": {"lat": 18.5513, "lng": 73.9348, "file": "kharadi_crime_analysis_summary1.xlsx"},
+    "Wagholi": {"lat": 18.5793, "lng": 73.9689, "file": "wagholi_crime_analysis_summary1.xlsx"}
+}
 }
 
 class CrimeService:
@@ -82,13 +83,18 @@ class CrimeService:
 
     @staticmethod
     def find_database_dir():
-        """Walks up parent directories to find where the Excel files are located."""
+        """Finds where the Excel files are located: package-relative or parent folders."""
         current_dir = os.path.abspath(os.path.dirname(__file__))
+        # Direct lookup inside app/datasets
+        datasets_dir = os.path.abspath(os.path.join(current_dir, "..", "datasets"))
+        if os.path.exists(os.path.join(datasets_dir, "Deccan.xlsx")):
+            return datasets_dir
+        # Walk up parent directories as a fallback
         for _ in range(7):
-            if os.path.exists(os.path.join(current_dir, "Alankar.xlsx")):
+            if os.path.exists(os.path.join(current_dir, "Deccan.xlsx")):
                 return current_dir
             current_dir = os.path.dirname(current_dir)
-        return r"d:\SAFEHER"
+        return r"E:\SafeHer"
 
     @staticmethod
     def get_crime_stats(area_name, time_period, start_hour, end_hour):
