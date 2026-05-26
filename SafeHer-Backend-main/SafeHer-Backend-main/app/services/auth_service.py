@@ -4,10 +4,37 @@ import requests
 import os
 from dotenv import load_dotenv
 
+import json
+
 load_dotenv()
 
 FIREBASE_API_KEY = os.getenv("FIREBASE_API_KEY")
 FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID")
+
+# Automatically resolve FIREBASE_PROJECT_ID from FIREBASE_SERVICE_ACCOUNT or service_account.json if not set
+if not FIREBASE_PROJECT_ID:
+    # 1. Try from FIREBASE_SERVICE_ACCOUNT environment variable
+    firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+    if firebase_json:
+        try:
+            cred_dict = json.loads(firebase_json)
+            FIREBASE_PROJECT_ID = cred_dict.get("project_id")
+        except Exception as e:
+            print(f"Error parsing FIREBASE_SERVICE_ACCOUNT for project ID: {e}")
+
+    # 2. Try from local service_account.json file
+    if not FIREBASE_PROJECT_ID:
+        try:
+            key_path = os.getenv("FIREBASE_KEY_PATH", "service_account.json")
+            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+            full_path = os.path.join(base_dir, key_path)
+            if os.path.exists(full_path):
+                with open(full_path, "r") as f:
+                    cred_dict = json.load(f)
+                    FIREBASE_PROJECT_ID = cred_dict.get("project_id")
+        except Exception as e:
+            print(f"Error reading local service_account.json for project ID: {e}")
+
 globalUID = 0
 
 def login_user(email, password):
@@ -50,30 +77,16 @@ def signup_user(email, password, name, phone):
     globalUID = uid
     id_token = data["idToken"]
 
-    # Step 2 → Store data in Firestore
-    firestore_url = f"https://firestore.googleapis.com/v1/projects/{FIREBASE_PROJECT_ID}/databases/(default)/documents/users/{uid}"
-
-    firestore_payload = {
-        "fields": {
-            "name": {"stringValue": name},
-            "email": {"stringValue": email},
-            "phone": {"stringValue": phone},
-            "date_of_joining": {"stringValue": str(datetime.datetime.now())}
-        }
-    }
-
-    headers = {
-        "Authorization": f"Bearer {id_token}"
-    }
-
-    firestore_response = requests.patch(
-        firestore_url,
-        headers=headers,
-        json=firestore_payload
-    )
-
-    if firestore_response.status_code in [200, 201]:
+    # Step 2 → Store data in Firestore using the Admin SDK (bypasses security rules)
+    try:
+        from config.firebase_config import db
+        db.collection("users").document(uid).set({
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "date_of_joining": datetime.datetime.now().isoformat()
+        })
         return {"success": True, "uid": uid}
-    else:
-        return {"success": False, "message": firestore_response.json()}
+    except Exception as e:
+        return {"success": False, "message": f"Firestore Admin SDK Error: {str(e)}"}
     
