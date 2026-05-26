@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: safeher-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn "app.main:create_app()"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      # Add other environment variables from your .env here
+      # Make sure NOT to commit secrets directly in this file
+      # You can manage them in the Render Dashboard securely
