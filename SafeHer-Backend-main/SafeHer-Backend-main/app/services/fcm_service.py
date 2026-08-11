@@ -56,7 +56,6 @@ def send_sos_notification(user_id, lat, lon, user_name="A user"):
                 android=messaging.AndroidConfig(
                     priority="high",
                     notification=messaging.AndroidNotification(
-                        channel_id="sos_alerts",
                         priority="max",
                         sound="default",
                     ),
