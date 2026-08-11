@@ -3,7 +3,7 @@ from datetime import datetime
 from langgraph.graph import StateGraph, END
 from typing import TypedDict
 from config.firebase_config import db
-from services.fast2sms_service import send_sos_sms
+from services.fcm_service import send_sos_notification
 
 
 class EmergencyState(TypedDict):
@@ -18,7 +18,7 @@ class EmergencyState(TypedDict):
 # --- Step 1: Alert trusted contacts ---
 def alert_contacts(state: EmergencyState):
 
-    print("Sending SMS to trusted contacts...")
+    print("Sending push notifications to trusted contacts...")
 
     user_name = "A SafeHer User"
     try:
@@ -32,28 +32,14 @@ def alert_contacts(state: EmergencyState):
         print(f"Error fetching user name from Firestore: {e}")
 
     user_id = state.get("user_id")
-    contacts = []
-    if user_id:
-        try:
-            guardians_ref = db.collection("users").document(user_id).collection("guardians").stream()
-            for g in guardians_ref:
-                g_data = g.to_dict()
-                phone = g_data.get("phone")
-                if phone:
-                    contacts.append(phone)
-        except Exception as e:
-            print(f"Error fetching dynamic contacts from Firestore: {e}")
 
-    if not contacts:
-        contacts = [
-            "+919699447120",
-            "+919373351445",
-            "+917058541200",
-            "+919021436064",
-        ]
+    # Send FCM push notifications to all guardians
+    result = send_sos_notification(user_id, state["lat"], state["lon"], user_name=user_name)
 
-    for contact in contacts:
-        send_sos_sms(contact, state["lat"], state["lon"], user_name=user_name)
+    if result:
+        print(f"Push notifications sent: {result}")
+    else:
+        print("No guardians with FCM tokens found.")
 
     state["contacts_alerted"] = True
     return state
