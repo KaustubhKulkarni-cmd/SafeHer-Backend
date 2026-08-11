@@ -15,7 +15,7 @@ Please check immediately."""
 
     # Fast2SMS requires comma separated numbers without '+'
     # Strip non-numeric characters just in case, but keep the 10 digits
-    clean_phone = ''.join(filter(str.isdigit, phone_number))
+    clean_phone = ''.join(filter(str.isdigit, str(phone_number)))
     if len(clean_phone) > 10 and clean_phone.startswith("91"):
         clean_phone = clean_phone[-10:]
 
