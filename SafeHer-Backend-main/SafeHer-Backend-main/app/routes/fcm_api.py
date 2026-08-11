@@ -29,7 +29,10 @@ def register_fcm_token():
         user_doc = db.collection("users").document(uid).get()
         if user_doc.exists:
             user_data = user_doc.to_dict()
-            user_phone = user_data.get("phone", "")
+            raw_user_phone = user_data.get("phone", "")
+            
+            # Remove all spaces to match the Guardian document IDs (e.g. "+91 123" -> "+91123")
+            user_phone = raw_user_phone.replace(" ", "")
 
             if user_phone:
                 # Search all users' guardians subcollections for this phone
