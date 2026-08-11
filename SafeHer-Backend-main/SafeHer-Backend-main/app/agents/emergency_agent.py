@@ -3,7 +3,7 @@ from datetime import datetime
 from langgraph.graph import StateGraph, END
 from typing import TypedDict
 from config.firebase_config import db
-from services.twilio_service import send_sos_sms
+from services.fast2sms_service import send_sos_sms
 
 
 class EmergencyState(TypedDict):
