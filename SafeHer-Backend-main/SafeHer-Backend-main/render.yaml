@@ -3,10 +3,17 @@ services:
     name: safeher-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn "app.main:create_app()"
+    startCommand: gunicorn "app.main:create_app()" --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
-      # Add other environment variables from your .env here
-      # Make sure NOT to commit secrets directly in this file
-      # You can manage them in the Render Dashboard securely
+      # Add other environment variables from your Render Dashboard,
+      # not in this file. Example keys you should configure there:
+      # - FIREBASE_SERVICE_ACCOUNT
+      # - FIREBASE_API_KEY
+      # - OPENROUTE_API_KEY
+      # - GEMINI_API_KEY
+      # - TWILIO_ACCOUNT_SID
+      # - TWILIO_AUTH_TOKEN
+      # - TWILIO_PHONE_NUMBER
+      # - FIREBASE_KEY_PATH (only if using service_account.json file)
